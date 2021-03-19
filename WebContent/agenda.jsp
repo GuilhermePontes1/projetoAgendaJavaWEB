@@ -9,7 +9,7 @@
 </head>
 <body id = "meio">
 		<h1>Agenda de contatos</h1>
-		<a href="" class= "botao1">Novo Contato</a>
+		<a href="novo.html" class= "botao1">Novo Contato</a>
 		
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Crete+Round&display=swap');
