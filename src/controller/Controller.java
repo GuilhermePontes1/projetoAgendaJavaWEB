@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.DAO;
 import model.JavaBeans;
 
-@WebServlet(urlPatterns = { "/Controller", "/main", "/insert" })
+@WebServlet(urlPatterns = { "/Controller", "/main", "/insert", "/select" })
 public class Controller extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	DAO dao = new DAO();
@@ -32,6 +32,8 @@ public class Controller extends HttpServlet {
 			agenda(request, response);
 		} else if (action.equals("/insert")) {
 			novoContatoAgenda(request, response);
+		} else if (action.equals("/select")) {
+			listarContatoAgenda(request, response);
 		} else {
 			response.sendRedirect("index.html");
 		}
@@ -45,16 +47,14 @@ public class Controller extends HttpServlet {
 			throws ServletException, IOException {
 		// Aqui eu crio um objeto que irá receber os dados do JavaBeans
 		ArrayList<JavaBeans> lista = dao.listarAgenda();
-		//encaminha a lista para documento agenda.jsp
-		request.setAttribute("agenda",lista);
+		// encaminha a lista para documento agenda.jsp
+		request.setAttribute("agenda", lista);
 		RequestDispatcher rd = request.getRequestDispatcher("agenda.jsp");
-		
-		rd.forward(request, response); //encaminha o objeto lista para agenda.jsp
-		
+
+		rd.forward(request, response); // encaminha o objeto lista para agenda.jsp
 
 		// teste de recebimento da lista
 
-		
 		/*
 		 * for (int i = 0; i < lista.size(); i++) {
 		 * System.out.println(lista.get(i).getIdcon());
@@ -67,7 +67,7 @@ public class Controller extends HttpServlet {
 
 	}
 
-	//}
+	// }
 
 	// Novo Contato
 	protected void novoContatoAgenda(HttpServletRequest request, HttpServletResponse response)
@@ -88,4 +88,11 @@ public class Controller extends HttpServlet {
 		response.sendRedirect("main");
 	}
 
+	// editar contato
+	protected void listarContatoAgenda(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// recebimento do contato do id a ser modificado
+		String idcon = request.getParameter("idcon");
+
+	}
 }
